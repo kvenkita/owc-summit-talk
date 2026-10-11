@@ -1,0 +1,212 @@
+/* ============================================================================
+   Putting Wealth on the Map — summit deck theme
+   UNC Charlotte green + gold (from the colleague's pptx). No purple, no red.
+   Data rule on every chart: green = more mobile, brown = less mobile.
+   Canvas is 1280 × 720; sizes are in px and reveal.js scales the whole slide.
+   ========================================================================= */
+
+/* ---- Fonts (vendored, offline-safe) ------------------------------------- */
+@font-face{font-family:"Lato";src:url("fonts/lato-400.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"Lato";src:url("fonts/lato-400-italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap;}
+@font-face{font-family:"Lato";src:url("fonts/lato-700.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:"Lato";src:url("fonts/lato-900.woff2") format("woff2");font-weight:900;font-style:normal;font-display:swap;}
+
+/* ---- Design tokens ------------------------------------------------------ */
+:root{
+  /* brand chrome */
+  --green:      #005035;
+  --green-deep: #04432E;
+  --gold:       #A49665;   /* rules, pills, fills */
+  --gold-light: #C8BC8F;   /* small text on green (6:1) */
+  --gold-ink:   #6F6236;   /* small text on white/cream (6:1) */
+  --cream:      #F3F1EA;
+  --white:      #FFFFFF;
+  --ink:        #101820;
+  --ink-soft:   #4A5048;
+  --line:       #C2C0BB;
+  --line-soft:  #E2E0D9;
+  /* data meaning */
+  --more:       #1D6650;   /* more mobile / above median */
+  --less:       #9A6229;   /* less mobile / below median / the problem */
+  --income:     #5B6B78;   /* income series (cool slate) */
+  --wealth:     #9A6229;   /* wealth series = --less */
+  --sans: "Lato", "Segoe UI", Arial, sans-serif;  /* Greek α/β fall back to Segoe UI / Arial */
+}
+
+/* ---- Base --------------------------------------------------------------- */
+.reveal-viewport{background:var(--white);}
+.reveal{font-family:var(--sans);font-size:22px;font-weight:400;color:var(--ink);}
+.reveal .slides{text-align:left;}
+.reveal .slides > section,
+.reveal .slides > section > section{
+  width:1280px;height:720px;
+  padding:78px 85px 0;
+  box-sizing:border-box;
+}
+.reveal h1,.reveal h2,.reveal h3{
+  font-family:var(--sans);color:var(--green);font-weight:900;
+  line-height:1.08;letter-spacing:-0.012em;text-transform:none;margin:0 0 .4em;
+}
+.reveal h1{font-size:76px;}
+.reveal h2{font-size:46px;max-width:1080px;}
+.reveal h3{font-size:24px;font-weight:700;}
+.reveal p{line-height:1.45;margin:0 0 .65em;}
+.reveal strong{font-weight:700;}
+.reveal em{font-style:italic;}   /* reveal's reset.css strips it */
+.reveal a{color:var(--green);text-decoration:none;border-bottom:1px solid rgba(0,80,53,.35);}
+
+/* ---- Slide frame -------------------------------------------------------- */
+.eyebrow{
+  display:block;font-weight:700;font-size:16px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold-ink);margin:0 0 16px;
+}
+.lede{font-size:24px;line-height:1.5;max-width:640px;}
+.body{font-size:21px;line-height:1.5;}
+.kicker{font-size:19px;color:var(--ink-soft);line-height:1.45;}
+.small{font-size:16px;color:var(--ink-soft);}
+.source{
+  position:absolute;left:85px;right:160px;bottom:46px;
+  font-size:15px;line-height:1.35;color:var(--ink-soft);
+}
+.source a{color:var(--ink-soft);border-bottom-color:rgba(74,80,72,.4);}
+.rule{width:84px;height:5px;background:var(--gold);border:0;margin:22px 0 24px;}
+
+/* page number, drawn inside each slide by a script (aligned with the footer) */
+.pgnum{position:absolute;right:85px;bottom:46px;font-size:15px;color:var(--ink-soft);font-variant-numeric:tabular-nums;}
+section.dark .pgnum{color:var(--gold-light);}
+
+/* reveal chrome */
+.reveal .progress{color:var(--gold);height:4px;}
+.reveal .controls{color:var(--green);}
+.reveal-viewport.dark .reveal .controls,
+.reveal-viewport.dark .controls{color:var(--gold-light);}
+
+/* ---- Dark (green) slides: title, dividers ------------------------------- */
+section.dark{color:var(--white);}
+section.dark h1, section.dark h2, section.dark p, section.dark strong{color:var(--white);}
+section.dark .eyebrow{color:var(--gold-light);}
+section.dark .kicker{color:#DCE6E0;}
+section.dark .source{color:#C9D6CF;}
+.reveal section.dark a{color:var(--gold-light);border-bottom:2px solid rgba(200,188,143,.55);}
+
+/* ---- Layout helpers ----------------------------------------------------- */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+.stack-center{display:flex;flex-direction:column;justify-content:center;height:100%;}
+.full{height:100%;}
+.center{text-align:center;}
+.reveal .mt-s{margin-top:12px;} .reveal .mt-m{margin-top:26px;} .reveal .mt-l{margin-top:44px;}
+.nowrap{white-space:nowrap;}
+.mono-num{font-variant-numeric:tabular-nums;}
+
+/* ---- Cards -------------------------------------------------------------- */
+.card{background:var(--cream);border-radius:14px;padding:26px 26px 24px;box-sizing:border-box;}
+.card .label{font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin:0 0 14px;}
+.card h3{color:var(--green);margin:0 0 10px;}
+.card p{font-size:19px;line-height:1.5;color:var(--ink);margin:0;}
+.card .num{font-weight:900;font-size:44px;line-height:1;color:var(--gold-ink);margin:0 0 18px;}
+.card.solid{background:var(--green);}
+.card.solid h3,.card.solid p{color:var(--white);}
+.card.solid .num{color:var(--gold-light);}
+.card.top-green{border-top:6px solid var(--green);}
+.card.top-gold{border-top:6px solid var(--gold);}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+
+/* stat colors (colleague's two-tone numbers) */
+.stat{font-weight:900;font-size:44px;line-height:1.05;letter-spacing:-0.01em;margin:0 0 14px;}
+.c-green{color:var(--green);} .c-less{color:var(--less);} .c-more{color:var(--more);}
+.c-income{color:var(--income);} .c-gold{color:var(--gold-ink);}
+.tag-income{color:var(--income);font-weight:700;}
+.tag-wealth{color:var(--wealth);font-weight:700;}
+.tag-more{color:var(--more);font-weight:700;}
+
+/* ---- Data table (slide 4) ---------------------------------------------- */
+table.data{border-collapse:collapse;font-size:21px;width:100%;}
+table.data th{background:var(--green);color:var(--white);font-weight:700;text-align:right;padding:15px 14px;}
+table.data th:first-child,table.data td:first-child{text-align:left;}
+table.data td{padding:14px 14px;text-align:right;border:1px solid var(--line-soft);font-variant-numeric:tabular-nums;}
+table.data tr:nth-child(even) td{background:var(--cream);}
+
+/* ---- Horizontal bars (slide 6) ----------------------------------------- */
+.bars{display:grid;grid-template-columns:150px 1fr;row-gap:20px;column-gap:22px;align-items:center;}
+.bars .name{text-align:right;font-weight:700;font-size:21px;}
+.bars .track{display:flex;align-items:center;gap:16px;height:46px;}
+.bars .bar{height:46px;border-radius:5px;background:var(--gold);min-width:8px;}
+.bars .bar.lead{background:var(--green);}
+.bars .val{font-weight:700;font-size:21px;white-space:nowrap;}
+.bars .val.lead{color:var(--green);}
+
+/* ---- Pills (slide 3) --------------------------------------------------- */
+.pill{
+  display:inline-block;font-weight:700;font-size:19px;color:var(--green-deep);
+  background:var(--gold);padding:12px 22px;border-radius:999px;margin:0 14px 12px 0;
+}
+
+/* ---- Screenshots -------------------------------------------------------- */
+.shot{display:block;width:100%;border-radius:4px;box-shadow:0 18px 50px -24px rgba(16,24,32,.45);}
+.shot.bare{box-shadow:none;}
+
+/* ---- Mobility section components (ported from the NNIP deck) ----------- */
+.defrow{border-left:4px solid var(--line);padding:4px 0 4px 18px;margin:0 0 22px;}
+.defrow .sym{font-weight:900;font-size:30px;margin-right:10px;}
+.defrow .name{font-weight:700;font-size:15px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-soft);}
+.defrow .desc{font-size:19px;line-height:1.45;margin-top:4px;}
+.defrow.alpha{border-color:var(--more);}  .defrow.alpha .sym{color:var(--more);}
+.defrow.beta{border-color:var(--income);} .defrow.beta .sym{color:var(--income);}
+.defrow.gap{border-color:var(--less);}    .defrow.gap .sym{color:var(--less);}
+
+.bigstat{font-weight:900;line-height:.9;letter-spacing:-0.02em;}
+.bigstat .unit{font-weight:700;font-size:.34em;letter-spacing:0;color:var(--ink-soft);}
+
+.concepts{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:26px;}
+.concepts .card{padding:20px 18px;}
+.concepts .card h3{font-size:20px;margin-bottom:8px;}
+.concepts .card p{font-size:16.5px;line-height:1.45;color:var(--ink-soft);}
+.concepts .card.inc{border-top:5px solid var(--income);} .concepts .card.inc h3{color:var(--income);}
+.concepts .card.wlt{border-top:5px solid var(--less);}   .concepts .card.wlt h3{color:var(--less);}
+
+.figframe{background:var(--white);border:1px solid var(--line-soft);border-radius:12px;padding:10px;box-shadow:0 10px 34px -22px rgba(16,24,32,.4);}
+.figframe img{display:block;width:100%;}
+
+/* Browser chrome frame for the live tool */
+.browser{border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:0 24px 60px -28px rgba(16,24,32,.5);background:#fff;}
+.browser .bar{display:flex;align-items:center;gap:8px;background:var(--cream);padding:9px 14px;border-bottom:1px solid var(--line);}
+.browser .dot{width:10px;height:10px;border-radius:50%;background:var(--line);display:inline-block;}
+.browser .url{flex:1;font-size:14px;color:var(--ink-soft);background:#fff;border:1px solid var(--line);border-radius:6px;padding:4px 12px;margin-left:8px;}
+.browser .frame-wrap{position:relative;background:#fff;overflow:hidden;}
+.browser iframe{display:block;width:100%;border:0;background:#fff;}
+
+/* QR codes (slide 14) */
+.qr-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px;}
+.reveal a.qr{display:flex;align-items:center;gap:16px;background:var(--white);border:1px solid var(--line);
+  border-radius:12px;padding:10px 16px 10px 10px;border-bottom:1px solid var(--line);color:var(--ink);}
+.qr img{width:124px;height:124px;flex:none;display:block;}
+.qr span{font-size:14.5px;line-height:1.4;color:var(--ink-soft);overflow-wrap:anywhere;}
+.qr strong{display:block;font-size:19px;color:var(--green);margin-bottom:4px;}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:18px;
+  background:var(--green);color:var(--white);padding:13px 24px;border-radius:999px;
+  box-shadow:0 8px 20px -10px rgba(0,80,53,.7);transition:transform .15s ease, background .15s ease;
+}
+.reveal a.btn{color:var(--white);border-bottom:0;}
+.reveal a.btn:hover{transform:translateY(-1px);background:var(--green-deep);}
+
+/* ============================================================================
+   Fragment animations (from the NNIP deck)
+   ========================================================================= */
+.reveal .fragment.rise{opacity:0;transform:translateY(14px);transition:all .5s cubic-bezier(.2,.7,.2,1);}
+.reveal .fragment.rise.visible{opacity:1;transform:none;}
+.reveal .fragment.draw{opacity:1;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s ease;}
+.reveal .fragment.draw.visible{stroke-dashoffset:0;}
+.reveal .fragment.pop{opacity:0;transform:scale(.2);transform-box:fill-box;transform-origin:center;transition:all .45s cubic-bezier(.2,1.4,.4,1);}
+.reveal .fragment.pop.visible{opacity:1;transform:scale(1);}
+.grow{transform:scaleX(0);transform-box:fill-box;transform-origin:left center;transition:transform .8s cubic-bezier(.2,.7,.2,1);}
+.reveal .fragment.growbar{opacity:1;}
+.reveal .fragment.growbar .grow{transform:scaleX(0);}
+.reveal .fragment.growbar.visible .grow{transform:scaleX(1);}
+.reveal .fragment.flash{opacity:0;transition:opacity .4s ease;}
+.reveal .fragment.flash.visible{opacity:1;}
+/* off-screen fragment markers that drive the β-in-motion steps */
+.reveal .bstep{position:absolute;left:-9999px;width:0;height:0;padding:0;margin:0;overflow:hidden;}
